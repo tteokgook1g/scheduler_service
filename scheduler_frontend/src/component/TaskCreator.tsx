@@ -6,6 +6,7 @@ import {
   Button,
   Textarea,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import { defaultTaskData } from "../types";
 import { usePutTaskData } from "../serverRequest";
@@ -54,7 +55,7 @@ export const TaskCreator = () => {
       makeToast({
         position: "top",
         title: "Fail to Create",
-        description:`response code: ${res.status}`,
+        description: `response code: ${res.status}`,
         status: "error",
         duration: 1500,
         isClosable: true,
@@ -64,35 +65,39 @@ export const TaskCreator = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <FormControl>
-        <FormLabel>과제명</FormLabel>
-        <Input
-          type="text"
-          name="name"
-          placeholder="과제명을 입력하세요"
-          value={formData.name}
-          onChange={onInputChange}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>일시</FormLabel>
-        <Input
-          type="datetime-local"
-          name="date"
-          value={dateToDateTimeLocal(formData.date)}
-          onChange={onInputChange}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel>설명</FormLabel>
-        <Textarea
-          name="description"
-          placeholder="과제에 대한 설명을 입력하세요"
-          value={formData.description}
-          onChange={onTextAreaChange}
-        />
-      </FormControl>
-      <Button type="submit">생성</Button>
+      <Flex flexDir="column" gap="1.5rem">
+        <FormControl
+          isInvalid={formData.name === "" || formData.name === undefined}
+        >
+          <FormLabel>과제명</FormLabel>
+          <Input
+            type="text"
+            name="name"
+            placeholder="과제명을 입력하세요"
+            value={formData.name}
+            onChange={onInputChange}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>일시</FormLabel>
+          <Input
+            type="datetime-local"
+            name="date"
+            value={dateToDateTimeLocal(formData.date)}
+            onChange={onInputChange}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>설명</FormLabel>
+          <Textarea
+            name="description"
+            placeholder="과제에 대한 설명을 입력하세요"
+            value={formData.description}
+            onChange={onTextAreaChange}
+          />
+        </FormControl>
+        <Button type="submit">생성</Button>
+      </Flex>
     </form>
   );
 };

@@ -13,7 +13,7 @@ import { ReactComponent as ChevronIcon } from "../asset/chevron-thin-down.svg";
 import { useDeleteTaskData } from "../serverRequest";
 
 import { dateToKorean } from "../utils";
-import { bgTaskView } from "../constants";
+import { useMediaQuery } from "react-responsive";
 
 interface TaskViewProps extends typeTaskData {
   setUpdateTaskName: React.Dispatch<React.SetStateAction<string | null>>;
@@ -28,6 +28,7 @@ export const TaskView: React.FC<TaskViewProps> = ({
   const [isShowDetail, setIsShowDetail] = useState(false);
   const deleteTaskData = useDeleteTaskData();
   const makeToast = useToast();
+  const isSmallDevice = useMediaQuery({ query: "(max-width : 40rem)" });
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -35,37 +36,30 @@ export const TaskView: React.FC<TaskViewProps> = ({
   };
 
   return (
-    <Box bgColor={bgTaskView}>
-      <Flex
-        minH={"4rem"}
-        align="center"
-        onClick={onClick}
-        w="100%"
-        justifyContent="space-between"
-      >
-        <Flex>
-          <Text
-            marginEnd={"2rem"}
-            marginStart={"1rem"}
-            fontSize="larger"
-            fontWeight="700"
-          >
+    <Flex p="1rem" flexDir="column" gap="1rem" onClick={onClick}>
+      <Flex w="100%" justifyContent="space-between">
+        <Flex
+          flexDir={isSmallDevice ? "column" : "row"}
+          gap="0.5rem"
+          align="baseline"
+        >
+          <Text className="font-bigger" fontWeight="700">
             {name}
           </Text>
-          <Text marginEnd={"2rem"}>{dateToKorean(date)}</Text>
+          <Text>{dateToKorean(date)}</Text>
         </Flex>
-        <Center marginEnd={"2rem"}>
+        <Center pl="0.5rem">
           <Icon as={ChevronIcon} width={"1rem"} height={"1rem"} />
         </Center>
       </Flex>
+
       {isShowDetail && (
-        <Box>
-          <Text marginStart={"1rem"}>설명: {description}</Text>
-          <Box>
+        <>
+          <Text>설명: {description}</Text>
+          <Flex gap="1rem">
             <Button
               colorScheme={"blue"}
               variant="solid"
-              m={"1rem"}
               onClick={() => {
                 setUpdateTaskName(name);
               }}
@@ -75,7 +69,6 @@ export const TaskView: React.FC<TaskViewProps> = ({
             <Button
               colorScheme={"red"}
               variant="outline"
-              m={"1rem"}
               onClick={async () => {
                 const res = await deleteTaskData({ name: name });
                 if (res.status === 200) {
@@ -100,9 +93,9 @@ export const TaskView: React.FC<TaskViewProps> = ({
             >
               삭제
             </Button>
-          </Box>
-        </Box>
+          </Flex>
+        </>
       )}
-    </Box>
+    </Flex>
   );
 };

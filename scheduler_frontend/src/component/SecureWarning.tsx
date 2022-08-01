@@ -8,13 +8,7 @@ import React from "react";
 
 export const SecureWarning: React.FC = () => {
   return (
-    <Alert
-      status="error"
-      m="1rem"
-      w="100%"
-      flexDirection="column"
-      alignItems="center"
-    >
+    <Alert status="error" w="100%" flexDirection="column" alignItems="center">
       <AlertIcon boxSize="2rem" />
       <AlertTitle mt="0.4rem" mb="0.2rem">
         개인정보를 입력하지 마십시오
