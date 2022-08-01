@@ -96,67 +96,48 @@ export const TaskUpdater: React.FC<TaskUpdaterProps> = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <Box bgColor={bgTaskView}>
-        <Flex
-          minH={"4rem"}
-          align="center"
-          w="100%"
-          justifyContent="space-between"
-        >
-          <Flex>
-            <FormControl>
-              <Input
-                marginEnd={"2rem"}
-                marginStart={"1rem"}
-                fontSize="larger"
-                fontWeight="700"
-                placeholder={name}
-                value={formData.name}
-                type="text"
-                onChange={onInputChange}
-                name="name"
-              ></Input>
-            </FormControl>
-            <Input
-              marginEnd={"2rem"}
-              type="datetime-local"
-              value={dateToDateTimeLocal(formData.date)}
-              onChange={onInputChange}
-              name="date"
-            ></Input>
-          </Flex>
-        </Flex>
+      <Flex w="100%" flexDir="column" p="1.5rem">
+        <Input
+          className="font-bigger"
+          fontWeight="700"
+          placeholder={name}
+          value={formData.name}
+          type="text"
+          onChange={onInputChange}
+          name="name"
+          mb="1rem"
+        ></Input>
 
-        <Box>
-          <Text marginStart={"1rem"} marginEnd={"1rem"}>
-            설명:{" "}
-            <Textarea
-              value={formData.description}
-              onChange={onTextAreaChange}
-              name="description"
-            />
-          </Text>
-          <Box>
-            <Button
-              colorScheme={"blue"}
-              variant="solid"
-              m={"1rem"}
-              type="submit"
-            >
-              확인
-            </Button>
-            <Button
-              variant="solid"
-              m={"1rem"}
-              onClick={() => {
-                setUpdateTaskName(null);
-              }}
-            >
-              취소
-            </Button>
-          </Box>
+        <Input
+          type="datetime-local"
+          value={dateToDateTimeLocal(formData.date)}
+          onChange={onInputChange}
+          name="date"
+          mb="1rem"
+        ></Input>
+
+        <Textarea
+          value={formData.description}
+          onChange={onTextAreaChange}
+          name="description"
+          placeholder="설명을 입력하세요"
+          mb="1rem"
+        />
+        <Box mt="0.5rem">
+          <Button colorScheme={"blue"} variant="solid" type="submit" mr="1rem">
+            확인
+          </Button>
+          <Button
+            variant="solid"
+            onClick={() => {
+              setUpdateTaskName(null);
+            }}
+            mr="1rem"
+          >
+            취소
+          </Button>
         </Box>
-      </Box>
+      </Flex>
     </form>
   );
 };

@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.4235c5c0.css",
-    "main.js": "/static/js/main.0dcece6e.js",
+    "main.css": "/static/css/main.32d4be0f.css",
+    "main.js": "/static/js/main.403b3b7b.js",
     "static/media/chevron-thin-down.svg": "/static/media/chevron-thin-down.edefc7c5c84a070453a2412426d2a94e.svg",
     "index.html": "/index.html",
-    "main.4235c5c0.css.map": "/static/css/main.4235c5c0.css.map",
-    "main.0dcece6e.js.map": "/static/js/main.0dcece6e.js.map"
+    "main.32d4be0f.css.map": "/static/css/main.32d4be0f.css.map",
+    "main.403b3b7b.js.map": "/static/js/main.403b3b7b.js.map"
   },
   "entrypoints": [
-    "static/css/main.4235c5c0.css",
-    "static/js/main.0dcece6e.js"
+    "static/css/main.32d4be0f.css",
+    "static/js/main.403b3b7b.js"
   ]
 }

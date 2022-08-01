@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { TaskView } from "../component/TaskView";
+import { TaskView } from "./TaskView";
 import { useLoadTaskData } from "../serverRequest";
-import { TaskUpdater } from "../component/TaskUpdater";
-import { List, ListItem } from "@chakra-ui/react";
-import { clrTaskViewItemShadow } from "../constants";
+import { TaskUpdater } from "./TaskUpdater";
+import { Box, List, ListItem } from "@chakra-ui/react";
+import { bgTaskView, clrTaskViewItemShadow } from "../constants";
 import { selectTaskData } from "../redux/taskDataState";
 import { useAppSelector } from "../redux";
 
-export const ViewPage = () => {
+export const ViewTab = () => {
   const taskData = useAppSelector(selectTaskData);
   const loadTaskData = useLoadTaskData();
 
@@ -27,24 +27,27 @@ export const ViewPage = () => {
           return (
             <ListItem
               key={val.name}
-              m="1rem"
+              bgColor={bgTaskView}
               boxShadow={`2px 2px 8px 0 ${clrTaskViewItemShadow}`}
-              className="taskViewItem"
             >
               {updateTaskName === val.name ? (
-                <TaskUpdater
-                  name={val.name}
-                  date={val.date}
-                  description={val.description}
-                  setUpdateTaskName={setUpdateTaskName}
-                />
+                <Box mb="3rem" mt="3rem">
+                  <TaskUpdater
+                    name={val.name}
+                    date={val.date}
+                    description={val.description}
+                    setUpdateTaskName={setUpdateTaskName}
+                  />
+                </Box>
               ) : (
-                <TaskView
-                  name={val.name}
-                  date={val.date}
-                  description={val.description}
-                  setUpdateTaskName={setUpdateTaskName}
-                ></TaskView>
+                <Box mb="1rem" mt="1rem">
+                  <TaskView
+                    name={val.name}
+                    date={val.date}
+                    description={val.description}
+                    setUpdateTaskName={setUpdateTaskName}
+                  ></TaskView>
+                </Box>
               )}
             </ListItem>
           );
